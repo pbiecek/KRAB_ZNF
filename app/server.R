@@ -1,17 +1,16 @@
-library(shiny)
-library(RTCGA)
-library(plotly)
-library(pheatmap)
-library(ggplot2)
-library(ggthemes)
-library(survminer)
-library(survival)
-library(plyr)
-library(dplyr)
-library(RColorBrewer)
-library(httpuv)
-#library(RTCGA.methylation)
-library(heatmaply)
+library("shiny")
+library("RTCGA")
+library("plotly")
+library("pheatmap")
+library("ggplot2")
+library("ggthemes")
+library("survminer")
+library("survival")
+library("plyr")
+library("dplyr")
+library("RColorBrewer")
+library("httpuv")
+library("heatmaply")
 
 
 
@@ -396,16 +395,16 @@ shinyServer(function(input, output) {
   output$expression_heatmap2 <- renderPlotly({
     if(input$restrict) {
       if(input$log_scale)
-        z <- log(t(expressions_means[, selected_group]) + 1) %>% as.matrix()
+        z <- as.matrix( log(t(expressions_means[, selected_group]) + 1) )
       else
-        z <- t(expressions_means[, selected_group]) %>% as.matrix()
+        z <- as.matrix( t(expressions_means[, selected_group]) )
       height <- 400
     }
     else {
       if(input$log_scale)
-        z <- log(t(expressions_means[, input$selected_genes_manually] + 1)) %>% as.matrix()
+        z <- as.matrix( log(t(expressions_means[, input$selected_genes_manually] + 1)) )
       else
-        z <- t(expressions_means[, input$selected_genes_manually]) %>% as.matrix()
+        z <- as.matrix( t(expressions_means[, input$selected_genes_manually]) )
       height <- length(input$selected_genes_manually)*22 + 10
       }
       # plot_ly(z = z,
